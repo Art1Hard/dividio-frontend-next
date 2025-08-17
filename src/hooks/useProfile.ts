@@ -1,3 +1,4 @@
+import { profileQueryKey } from "@/constants/query-keys.constants";
 import userService from "@/services/user.service";
 import { useQuery } from "@tanstack/react-query";
 
@@ -6,8 +7,9 @@ const useProfile = () => {
 		data: profile,
 		isLoading,
 		isError,
+		isSuccess,
 	} = useQuery({
-		queryKey: ["user"],
+		queryKey: [profileQueryKey],
 		queryFn: () => userService.getProfile(),
 		retry: (failureCount, error: any) => {
 			if (error?.response?.status === 401) return false;
@@ -15,7 +17,7 @@ const useProfile = () => {
 		},
 	});
 
-	return { profile, states: { isLoading, isError } };
+	return { profile, states: { isLoading, isError, isSuccess } };
 };
 
 export default useProfile;

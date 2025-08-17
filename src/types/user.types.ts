@@ -1,8 +1,8 @@
 export interface IUser {
-	id: String;
-	email: String;
-	name?: String;
-	password: String;
+	id: string;
+	email: string;
+	name?: string;
+	password: string;
 }
 
 export type TypeUserFormState = Partial<Omit<IUser, "id">>;

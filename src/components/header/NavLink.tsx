@@ -14,10 +14,7 @@ const NavLink = ({ href, children, className, title }: NavLinkProps) => {
 		<Link
 			title={title}
 			href={href}
-			className={cn(
-				" hover:text-blue-600 dark:hover:text-blue-400 transition-colors",
-				className
-			)}>
+			className={cn(" hover:text-accent transition-colors", className)}>
 			{children}
 		</Link>
 	);

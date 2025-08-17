@@ -2,8 +2,31 @@ import { NextRequest, NextResponse } from "next/server";
 import { EnumTokens } from "./services/auth-token.services";
 import { ROUTES } from "./config/routes.config";
 
+const routesWithWildcard = [
+	ROUTES.DASHBOARD,
+	ROUTES.PROFILE,
+	ROUTES.SIGN_IN,
+	ROUTES.SIGN_UP,
+];
+
+const isPublicRoute = (pathname: string) => {
+	const publicRoutes = [ROUTES.HOME];
+
+	return (
+		pathname.startsWith("/_next/") ||
+		pathname.startsWith("/favicon.ico") ||
+		pathname.startsWith("/api/") ||
+		publicRoutes.includes(pathname)
+	);
+};
+
 export async function middleware(request: NextRequest, response: NextResponse) {
 	const { url, cookies } = request;
+	const { pathname } = request.nextUrl;
+
+	if (isPublicRoute(pathname)) {
+		return NextResponse.next();
+	}
 
 	const refreshToken = cookies.get(EnumTokens.REFRESH_TOKEN)?.value;
 
@@ -21,5 +44,9 @@ export async function middleware(request: NextRequest, response: NextResponse) {
 }
 
 export const config = {
-	matcher: ["/dashboard/:path*", "/sign-in/:path*", "/sign-up/:path*"],
+	matcher: routesWithWildcard.map((route) =>
+		route === ROUTES.DASHBOARD || route === ROUTES.PROFILE
+			? `${route}/:path*`
+			: route
+	),
 };

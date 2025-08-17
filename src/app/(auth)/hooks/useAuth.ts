@@ -1,4 +1,5 @@
 import { ROUTES } from "@/config/routes.config";
+import { profileQueryKey } from "@/constants/query-keys.constants";
 import authService, { type AuthType } from "@/services/auth.service";
 import { IAuthFormType } from "@/types/auth.types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -14,7 +15,7 @@ const useAuth = (type: AuthType) => {
 		mutationKey: ["auth"],
 		mutationFn: (data: IAuthFormType) => authService.main(type, data),
 		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: ["user"] });
+			queryClient.invalidateQueries({ queryKey: [profileQueryKey] });
 			replace(ROUTES.DASHBOARD);
 		},
 	});

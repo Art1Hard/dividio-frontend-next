@@ -14,8 +14,9 @@ const BaseButton = ({
 }: BaseButtonProps) => {
 	return (
 		<button
+			type="button"
 			className={cn(
-				"px-4 py-2 rounded-lg transition-colors disabled:opacity-70 cursor-pointer",
+				"px-4 py-2 rounded-lg transition-colors disabled:opacity-70 cursor-pointer disabled:cursor-default",
 				color === "primary" &&
 					"text-white bg-accent hover:bg-accent-hover disabled:hover:bg-accent-disabled font-semibold",
 				color === "secondary" &&

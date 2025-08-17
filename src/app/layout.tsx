@@ -5,6 +5,7 @@ import { SITE_NAME } from "@/constants/seo.constants";
 import Header from "@/components/header";
 import clsx from "clsx";
 import Providers from "./providers";
+import { Toaster } from "sonner";
 
 const inter = Inter({
 	subsets: ["latin", "cyrillic"],
@@ -31,11 +32,13 @@ export default function RootLayout({
 			<body
 				className={clsx(
 					inter.variable,
-					"antialiased font-sans flex flex-col h-screen"
+					"antialiased font-sans flex flex-col min-h-screen"
 				)}>
 				<Providers>
 					<Header />
 					{children}
+
+					<Toaster position="bottom-right" theme="light" />
 				</Providers>
 			</body>
 		</html>
