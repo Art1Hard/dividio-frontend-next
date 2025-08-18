@@ -1,12 +1,12 @@
 import useProfile from "@/hooks/useProfile";
-import { TypeUserFormState } from "@/types/user.types";
+import { UserSchema } from "@/app/profile/models/user.schema";
 import { useEffect } from "react";
 import { UseFormReset } from "react-hook-form";
 
-const useInitialData = (reset: UseFormReset<TypeUserFormState>) => {
+const useInitialData = (reset: UseFormReset<UserSchema>) => {
 	const {
 		profile,
-		states: { isSuccess, isLoading },
+		states: { isSuccess },
 	} = useProfile();
 
 	useEffect(() => {
@@ -15,7 +15,6 @@ const useInitialData = (reset: UseFormReset<TypeUserFormState>) => {
 		reset({
 			email: profile.email ?? "",
 			name: profile.name ?? "",
-			password: "",
 		});
 	}, [isSuccess]);
 

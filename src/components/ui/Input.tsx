@@ -2,34 +2,43 @@
 
 import { useState, type InputHTMLAttributes } from "react";
 import { ClosedEyeIcon, OpenedEyeIcon } from "./auth/icons";
-import { FieldError } from "react-hook-form";
+import {
+	FieldErrors,
+	FieldValues,
+	Path,
+	UseFormRegister,
+} from "react-hook-form";
 import clsx from "clsx";
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-	id: string;
-	error?: FieldError;
+interface InputProps<FormData extends FieldValues>
+	extends InputHTMLAttributes<HTMLInputElement> {
+	name: Path<FormData>;
+	register: UseFormRegister<FormData>;
+	errors?: FieldErrors<FormData>;
 	label?: string;
 	enableShowPassword?: boolean;
 	rootClassName?: string;
 }
 
-const Input = ({
-	id,
-	error,
+const Input = <FormData extends FieldValues>({
+	name,
+	register,
+	errors,
 	label,
 	enableShowPassword,
 	rootClassName,
 	type = "text",
 	className,
 	...props
-}: InputProps) => {
+}: InputProps<FormData>) => {
+	const error = errors?.[name]?.message as string | undefined;
 	const [isShowPassword, setIsShowPassword] = useState(false);
 
 	return (
 		<div className={rootClassName}>
 			{label && (
 				<label
-					htmlFor={id}
+					htmlFor={props.id}
 					className="block text-sm font-medium text-secondary-800 mb-1">
 					{label}
 				</label>
@@ -40,14 +49,14 @@ const Input = ({
 					type={
 						type === "password" ? (isShowPassword ? "text" : "password") : type
 					}
-					id={id}
 					className={clsx(
 						"w-full px-4 py-2 rounded-lg bg-primary-300/50 focus:outline-none focus:ring-2 focus:ring-accent placeholder:text-secondary-500 border",
-						error ? "border-red-600" : "border-primary-400",
+						error ? "border-red-500" : "border-primary-400",
 						type === "password" && "pr-10",
 						className
 					)}
 					{...props}
+					{...register(name)}
 				/>
 
 				{type === "password" && enableShowPassword && (
@@ -60,10 +69,14 @@ const Input = ({
 					</button>
 				)}
 			</div>
+
+			{error && (
+				<p className="text-red-500 text-sm mt-1 overflow-hidden overflow-ellipsis text-nowrap">
+					{error}
+				</p>
+			)}
 		</div>
 	);
 };
-
-Input.displayName = "Input";
 
 export default Input;

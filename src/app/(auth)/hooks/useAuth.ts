@@ -1,30 +1,28 @@
 import { ROUTES } from "@/config/routes.config";
 import { profileQueryKey } from "@/constants/query-keys.constants";
 import authService, { type AuthType } from "@/services/auth.service";
-import { IAuthFormType } from "@/types/auth.types";
+import { ISignIn, ISignUp } from "@/types/auth.types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
 
 const useAuth = (type: AuthType) => {
 	const queryClient = useQueryClient();
 	const { replace } = useRouter();
-	const { register, handleSubmit } = useForm<IAuthFormType>();
 
-	const { mutate, isPending } = useMutation({
+	const {
+		mutate: auth,
+		mutateAsync: authAsync,
+		isPending,
+	} = useMutation({
 		mutationKey: ["auth"],
-		mutationFn: (data: IAuthFormType) => authService.main(type, data),
+		mutationFn: (data: ISignIn | ISignUp) => authService.main(type, data),
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: [profileQueryKey] });
 			replace(ROUTES.DASHBOARD);
 		},
 	});
 
-	const submit = handleSubmit((data: IAuthFormType) => {
-		mutate(data);
-	});
-
-	return { register, submit, isPending };
+	return { auth, authAsync, statuses: { isPending } };
 };
 
 export default useAuth;

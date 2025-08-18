@@ -9,7 +9,7 @@ const Profile = () => {
 	const {
 		register,
 		submit,
-		states: { isDirty, isPending },
+		states: { isDirty, isPending, errors },
 	} = useProfileForm();
 	const { logout, isPending: isLogoutPending } = useLogout();
 
@@ -21,44 +21,53 @@ const Profile = () => {
 				<h2 className="text-center font-bold mb-4 text-2xl">Профиль</h2>
 				<div className="space-y-4 mb-4">
 					<Input
+						register={register}
+						name="email"
+						errors={errors}
 						id="email"
 						label="Email:"
 						placeholder="example@example.ex"
-						{...register("email")}
-					/>
-					<Input
-						id="name"
-						label="Имя:"
-						placeholder="Иван"
-						{...register("name")}
 					/>
 
 					<Input
-						id="password"
+						register={register}
+						name="name"
+						errors={errors}
+						id="name"
+						label="Имя:"
+						placeholder="Иван"
+					/>
+
+					<Input
+						register={register}
+						name="password"
+						errors={errors}
 						type="password"
-						enableShowPassword
+						id="password"
 						label="Изменить пароль:"
+						enableShowPassword
 						placeholder="••••••••"
-						{...register("password")}
 					/>
 				</div>
 
 				<hr className="border-secondary-500 mb-4" />
 
-				<BaseButton
-					type="submit"
-					disabled={isPending || !isDirty}
-					className="w-full font-semibold mb-2">
-					Сохранить
-				</BaseButton>
+				<div className="flex flex-col gap-2 sm:flex-row">
+					<BaseButton
+						type="submit"
+						disabled={isPending || !isDirty}
+						className="w-full font-semibold">
+						Сохранить
+					</BaseButton>
 
-				<BaseButton
-					disabled={isLogoutPending}
-					color="danger"
-					className="w-full font-semibold"
-					onClick={() => logout()}>
-					{isLogoutPending ? "Выходим..." : "Выйти"}
-				</BaseButton>
+					<BaseButton
+						disabled={isLogoutPending}
+						color="danger"
+						className="w-full font-semibold"
+						onClick={() => logout()}>
+						{isLogoutPending ? "Выходим..." : "Выйти"}
+					</BaseButton>
+				</div>
 			</form>
 		</div>
 	);

@@ -4,33 +4,44 @@ import AuthFormCover from "@/components/ui/auth/AuthFormCover";
 import SwitchFormLink from "@/components/ui/auth/SwitchFormLink";
 import BaseButton from "@/components/ui/buttons/BaseButton";
 import Input from "@/components/ui/Input";
-import useAuth from "../hooks/useAuth";
+import useSignIn from "../hooks/useSignIn";
 
 const SignIn = () => {
-	const { register, submit, isPending } = useAuth("login");
+	const {
+		register,
+		submit,
+		states: { errors, isPending, isDirty },
+	} = useSignIn();
 
 	return (
 		<AuthFormCover title="Авторизация" className="sm:my-auto">
 			<form onSubmit={submit} className="mb-4">
 				<div className="space-y-4 mb-7">
 					<Input
+						register={register}
+						errors={errors}
+						name="email"
 						id="email"
 						label="Email:"
 						placeholder="example@example.com"
-						{...register("email")}
 					/>
 					<Input
-						type="password"
-						enableShowPassword
+						register={register}
+						errors={errors}
+						name="password"
 						id="password"
 						label="Пароль:"
+						type="password"
+						enableShowPassword
 						placeholder="••••••••"
-						{...register("password")}
 					/>
 				</div>
 
-				<BaseButton className="w-full" type="submit">
-					Войти
+				<BaseButton
+					disabled={isPending || !isDirty}
+					className="w-full"
+					type="submit">
+					{isPending ? "Входим..." : "Войти"}
 				</BaseButton>
 			</form>
 

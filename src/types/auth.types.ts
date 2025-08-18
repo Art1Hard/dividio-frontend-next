@@ -1,8 +1,13 @@
 import { IUser } from "./user.types";
 
-export interface IAuthFormType {
+export interface ISignIn {
 	email: string;
 	password: string;
+}
+
+export interface ISignUp {
+	user: ISignIn;
+	captchaToken: string;
 }
 
 export interface IAuthResponse {

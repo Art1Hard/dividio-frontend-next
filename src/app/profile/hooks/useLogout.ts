@@ -3,6 +3,7 @@ import { profileQueryKey } from "@/constants/query-keys.constants";
 import authService from "@/services/auth.service";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const useLogout = () => {
 	const queryClient = useQueryClient();
@@ -14,6 +15,7 @@ const useLogout = () => {
 		onSuccess: () => {
 			replace(ROUTES.SIGN_IN);
 			queryClient.setQueryData([profileQueryKey], null);
+			toast.success("Вы успешно вышли");
 		},
 	});
 
