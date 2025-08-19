@@ -7,13 +7,13 @@ import { toast } from "sonner";
 
 const useLogout = () => {
 	const queryClient = useQueryClient();
-	const { replace } = useRouter();
+	const { push } = useRouter();
 
 	const { mutate: logout, isPending } = useMutation({
 		mutationKey: ["auth", "logout"],
 		mutationFn: () => authService.logout(),
 		onSuccess: () => {
-			replace(ROUTES.SIGN_IN);
+			push(ROUTES.SIGN_IN);
 			queryClient.setQueryData([profileQueryKey], null);
 			toast.success("Вы успешно вышли");
 		},
