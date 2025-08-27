@@ -2,7 +2,7 @@
 
 import BaseButton from "@/components/ui/buttons/BaseButton";
 import useLogout from "./hooks/useLogout";
-import Input from "@/components/ui/Input";
+import Input from "@/components/ui/form/Input";
 import useProfileForm from "./hooks/useProfileForm";
 
 const Profile = () => {

@@ -3,7 +3,7 @@
 import AuthFormCover from "@/components/ui/auth/AuthFormCover";
 import SwitchFormLink from "@/components/ui/auth/SwitchFormLink";
 import BaseButton from "@/components/ui/buttons/BaseButton";
-import Input from "@/components/ui/Input";
+import Input from "@/components/ui/form/Input";
 import useSignIn from "../hooks/useSignIn";
 
 const SignIn = () => {

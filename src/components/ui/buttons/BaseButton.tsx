@@ -4,19 +4,22 @@ import cn from "clsx";
 export interface BaseButtonProps
 	extends ButtonHTMLAttributes<HTMLButtonElement> {
 	color?: "primary" | "secondary" | "danger";
+	fullRounded?: boolean;
 }
 
 const BaseButton = ({
 	color = "primary",
 	className,
 	children,
+	fullRounded,
 	...props
 }: BaseButtonProps) => {
 	return (
 		<button
 			type="button"
 			className={cn(
-				"px-4 py-2 rounded-lg transition-colors disabled:opacity-70 cursor-pointer disabled:cursor-default",
+				"py-2 transition-colors disabled:opacity-70 cursor-pointer disabled:cursor-default",
+				fullRounded ? "px-2 rounded-full" : "rounded-lg px-4",
 				color === "primary" &&
 					"text-white bg-accent hover:bg-accent-hover disabled:hover:bg-accent-disabled font-semibold",
 				color === "secondary" &&

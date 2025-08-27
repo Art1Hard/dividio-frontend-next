@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type InputHTMLAttributes } from "react";
-import { ClosedEyeIcon, OpenedEyeIcon } from "./auth/icons";
+import { ClosedEyeIcon, OpenedEyeIcon } from "../auth/icons";
 import {
 	FieldErrors,
 	FieldValues,
@@ -47,16 +47,20 @@ const Input = <FormData extends FieldValues>({
 			<div className="relative">
 				<input
 					type={
-						type === "password" ? (isShowPassword ? "text" : "password") : type
+						type === "password"
+							? isShowPassword
+								? "text"
+								: "password"
+							: "text"
 					}
 					className={clsx(
-						"w-full px-4 py-2 rounded-lg bg-primary-300/50 focus:outline-none focus:ring-2 focus:ring-accent placeholder:text-secondary-500 border",
+						"w-full px-4 py-2 rounded-lg bg-primary-300/50 focus:outline-none focus:ring-2 focus:ring-accent placeholder:text-secondary-500 border placeholder:text-base",
 						error ? "border-red-500" : "border-primary-400",
 						type === "password" && "pr-10",
 						className
 					)}
 					{...props}
-					{...register(name)}
+					{...register(name, { valueAsNumber: type === "number" })}
 				/>
 
 				{type === "password" && enableShowPassword && (
