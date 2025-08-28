@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { BaseButtonProps } from "./BaseButton";
 
-interface MutedButtonProps extends BaseButtonProps {}
+export interface MutedButtonProps extends BaseButtonProps {}
 
 const MutedButton = ({
 	color = "primary",

@@ -1,18 +1,15 @@
-import MutedButton from "@/components/ui/buttons/MutedButton";
 import BaseModal from "@/components/ui/overlays/BaseModal";
 import useModal from "@/hooks/useModal";
-import { FiEdit2 } from "react-icons/fi";
 import EditIncomeForm from "./EditIncomeForm";
 import { IIncome } from "@/types/income.types";
+import EditButton from "@/components/ui/buttons/EditButton";
 
 const EditIncome = ({ income }: { income: IIncome }) => {
 	const { isOpen, open, close } = useModal();
 
 	return (
 		<>
-			<MutedButton onClick={open} className="flex-1 flex justify-center">
-				<FiEdit2 size={16} />
-			</MutedButton>
+			<EditButton onClick={open} />
 
 			<BaseModal
 				isOpen={isOpen}

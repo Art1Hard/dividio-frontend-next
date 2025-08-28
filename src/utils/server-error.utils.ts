@@ -1,22 +1,23 @@
-type ServerError = {
-	response: {
-		data: {
-			error: string;
-			message: string;
-			statusCode: number;
-		};
+import { AxiosError } from "axios";
+
+type ServerErrorData = {
+	error: string;
+	message: string;
+	statusCode?: number;
+	code?: string;
+	details?: {
+		used: number;
+		limit: number;
+		available: number;
 	};
 };
 
-export function isServerError(e: unknown): e is ServerError {
+export function isServerError(e: unknown): e is AxiosError<ServerErrorData> {
 	return (
 		typeof e === "object" &&
 		e !== null &&
-		"response" in e &&
-		typeof (e as any).response === "object" &&
-		typeof (e as any).response.data === "object" &&
-		typeof (e as any).response.data.message === "string" &&
-		typeof (e as any).response.data.error === "string" &&
-		typeof (e as any).response.data.statusCode === "number"
+		"isAxiosError" in e &&
+		e instanceof AxiosError && // дополнительная проверка
+		typeof e.response?.data?.message === "string"
 	);
 }

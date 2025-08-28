@@ -1,5 +1,5 @@
 import { axiosWithAuth } from "@/api/interceptors";
-import { IncomeSchema } from "@/components/income/models/income.schema";
+import { IncomeSchema } from "@/components/dashboard/income/models/income.schema";
 import { IIncome, IIncomeData } from "@/types/income.types";
 
 class IncomeService {

@@ -1,6 +1,7 @@
 import DashboardHead from "@/components/dashboard/DashboardHead";
 import StatisticWidget from "./statistic/StatisticWidget";
 import IncomeWidget from "./income/IncomeWidget";
+import AllocationWidget from "./allocation/AllocationWidget";
 
 const Dashboard = () => {
 	return (
@@ -8,6 +9,7 @@ const Dashboard = () => {
 			<DashboardHead />
 			<StatisticWidget />
 			<IncomeWidget />
+			<AllocationWidget />
 		</div>
 	);
 };
