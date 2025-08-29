@@ -2,6 +2,11 @@ import { axiosWithAuth } from "@/api/interceptors";
 import { AllocationSchema } from "@/components/dashboard/allocation/models/allocation.schema";
 import { IAllocation, IAllocationData } from "@/types/allocation.types";
 
+export interface IEditAllocation {
+	id: string;
+	data: AllocationSchema;
+}
+
 class AllocationService {
 	private BASE_URL = "allocation";
 
@@ -15,13 +20,13 @@ class AllocationService {
 		return response.data;
 	}
 
-	// async edit(id: string, data: IncomeSchema) {
-	// 	const response = await axiosWithAuth.put<IIncome>(
-	// 		`${this.BASE_URL}/${id}`,
-	// 		data
-	// 	);
-	// 	return response.data;
-	// }
+	async edit({ id, data }: IEditAllocation) {
+		const response = await axiosWithAuth.put<IAllocation>(
+			`${this.BASE_URL}/${id}`,
+			data
+		);
+		return response.data;
+	}
 
 	async delete(id: string) {
 		const response = await axiosWithAuth.delete<IAllocation>(

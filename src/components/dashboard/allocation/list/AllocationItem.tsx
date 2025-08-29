@@ -1,9 +1,8 @@
-import DeleteButton from "@/components/ui/buttons/DeleteButton";
-import EditButton from "@/components/ui/buttons/EditButton";
 import ProgressBar from "@/components/ui/ProgressBar";
 import { DashboardWidgetItem } from "@/components/ui/wrappers/item";
 import { IAllocation } from "@/types/allocation.types";
 import DeleteAllocation from "../delete/DeleteAllocation";
+import EditAllocation from "../edit/EditAllocation";
 
 interface AllocationItemProps {
 	item: IAllocation;
@@ -21,7 +20,8 @@ const AllocationItem = ({ item }: AllocationItemProps) => {
 				/>
 			</DashboardWidgetItem.Header>
 			<DashboardWidgetItem.Content>
-				<EditButton /> <DeleteAllocation allocationId={item.id} />
+				<EditAllocation item={item} />{" "}
+				<DeleteAllocation allocationId={item.id} />
 			</DashboardWidgetItem.Content>
 		</DashboardWidgetItem>
 	);

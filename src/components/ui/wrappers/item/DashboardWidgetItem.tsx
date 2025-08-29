@@ -10,7 +10,7 @@ type DashboardWidgetItemType = FC<DashboardWrapperProps> & {
 
 const DashboardWidgetItem: DashboardWidgetItemType = ({ children }) => {
 	return (
-		<div className="flex flex-col gap-x-4 justify-between bg-slate-300/50 px-4 py-3 rounded-lg shadow-sm sm:flex-row sm:items-center">
+		<div className="flex flex-col gap-x-4 justify-between bg-primary-300/50 px-4 py-3 rounded-lg shadow-sm sm:flex-row sm:items-center">
 			{children}
 		</div>
 	);

@@ -14,7 +14,7 @@ const MutedButton = ({
 		<button
 			type="button"
 			className={clsx(
-				"text-secondary-800 py-3 bg-slate-300 transition-colors hover:text-white cursor-pointer sm:py-2",
+				"text-secondary-800 py-3 bg-primary-300 transition-colors hover:text-white cursor-pointer sm:py-2",
 				fullRounded ? "rounded-full px-3" : "rounded-md px-2",
 				color === "primary" &&
 					"hover:bg-accent-hover disabled:hover:bg-accent-disabled font-semibold",

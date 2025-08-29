@@ -1,17 +1,23 @@
-import { financeQueryKeys } from "@/constants/query-keys.constants";
-import useWarnUnsavedChanges from "@/hooks/useWarnUnsavedChanges";
-import allocationService from "@/services/allocation.service";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
 import {
 	allocationSchema,
 	AllocationSchema,
 } from "../models/allocation.schema";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { isServerError } from "@/utils/server-error.utils";
+import { toast } from "sonner";
+import { financeQueryKeys } from "@/constants/query-keys.constants";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import allocationService, {
+	type IEditAllocation,
+} from "@/services/allocation.service";
+import useWarnUnsavedChanges from "@/hooks/useWarnUnsavedChanges";
+import { IAllocation } from "@/types/allocation.types";
 
-const useCreateAllocation = (closeCallback: () => void) => {
+const useEditAllocation = (
+	allocation: IAllocation,
+	closeCallback: () => void
+) => {
 	const {
 		register,
 		handleSubmit,
@@ -21,17 +27,17 @@ const useCreateAllocation = (closeCallback: () => void) => {
 	} = useForm<AllocationSchema>({
 		resolver: zodResolver(allocationSchema),
 		mode: "onTouched",
-		defaultValues: { percentage: 5, title: "", color: "gray" },
+		defaultValues: allocation,
 	});
 	const selectedColor = watch("color");
 	useWarnUnsavedChanges(isDirty);
 
 	const queryClient = useQueryClient();
-	const { mutate: createIncome, isPending } = useMutation({
-		mutationFn: (data: AllocationSchema) => allocationService.create(data),
+	const { mutate: editAllocation, isPending } = useMutation({
+		mutationFn: (data: IEditAllocation) => allocationService.edit(data),
 		onSuccess: async (data) => {
 			await queryClient.invalidateQueries({ queryKey: financeQueryKeys.all });
-			toast.success(`Распределение "${data.title}" успешно добавлено`);
+			toast.success(`Распределение "${data.title}" успешно изменено`);
 			closeCallback();
 		},
 		onError: (e) => {
@@ -47,7 +53,9 @@ const useCreateAllocation = (closeCallback: () => void) => {
 		},
 	});
 
-	const submit = handleSubmit((data) => createIncome(data));
+	const submit = handleSubmit((data) =>
+		editAllocation({ id: allocation.id, data })
+	);
 
 	return {
 		register,
@@ -56,4 +64,4 @@ const useCreateAllocation = (closeCallback: () => void) => {
 	};
 };
 
-export default useCreateAllocation;
+export default useEditAllocation;
