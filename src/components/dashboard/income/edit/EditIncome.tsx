@@ -3,6 +3,7 @@ import useModal from "@/hooks/useModal";
 import EditIncomeForm from "./EditIncomeForm";
 import { IIncome } from "@/types/income.types";
 import EditButton from "@/components/ui/buttons/EditButton";
+import { motion } from "framer-motion";
 
 const EditIncome = ({ income }: { income: IIncome }) => {
 	const { isOpen, open, close } = useModal();

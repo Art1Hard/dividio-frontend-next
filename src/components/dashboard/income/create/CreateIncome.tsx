@@ -1,3 +1,5 @@
+"use client";
+
 import { BiPlus, BiPlusCircle } from "react-icons/bi";
 import BaseModal from "@/components/ui/overlays/BaseModal";
 import useModal from "@/hooks/useModal";

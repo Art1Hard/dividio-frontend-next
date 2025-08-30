@@ -1,4 +1,6 @@
-import { MouseEvent, MouseEventHandler, PropsWithChildren } from "react";
+import { AnimatePresence } from "framer-motion";
+import { MouseEvent, PropsWithChildren } from "react";
+import { createPortal } from "react-dom";
 import { BiX } from "react-icons/bi";
 
 interface BaseModalProps {
@@ -13,11 +15,13 @@ const BaseModal = ({
 	isOpen,
 	onClose,
 }: PropsWithChildren<BaseModalProps>) => {
+	if (!isOpen) return null;
+
 	const overlayHandle = (e: MouseEvent<HTMLDivElement>): void =>
 		e.target === e.currentTarget ? onClose() : undefined;
 
-	return (
-		isOpen && (
+	return createPortal(
+		<AnimatePresence>
 			<div
 				className="fixed inset-0 bg-black/50 flex justify-center overflow-y-auto z-50 cursor-pointer p-4"
 				onClick={(e) => overlayHandle(e)}>
@@ -33,7 +37,8 @@ const BaseModal = ({
 					{children}
 				</div>
 			</div>
-		)
+		</AnimatePresence>,
+		document.body
 	);
 };
 
