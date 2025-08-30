@@ -37,7 +37,11 @@ export default function RootLayout({
 				<Providers>
 					<Header />
 					{children}
-					<Toaster position="bottom-right" theme="system" />
+					<Toaster
+						className="cursor-default"
+						position="bottom-right"
+						theme="system"
+					/>
 				</Providers>
 			</body>
 		</html>

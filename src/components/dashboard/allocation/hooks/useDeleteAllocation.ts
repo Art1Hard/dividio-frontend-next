@@ -15,7 +15,6 @@ const useDeleteAllocation = () => {
 	});
 
 	const deleteHandler = (allocationId: string) =>
-		confirm("Вы точно хотите удалить распределение?") &&
 		deleteAllocation(allocationId);
 
 	return { deleteHandler };

@@ -23,7 +23,7 @@ const BaseButton = ({
 				color === "primary" &&
 					"text-white bg-accent hover:bg-accent-hover disabled:hover:bg-accent-disabled font-semibold",
 				color === "secondary" &&
-					"text-secondary-800 bg-primary-300/50 hover:bg-primary-300 disabled:hover:bg-primary-300/50",
+					"text-secondary-800 bg-primary-400/30 hover:bg-primary-400/50 disabled:hover:bg-primary-400/30",
 				color === "danger" && "text-white bg-red-600 hover:bg-red-700",
 				className
 			)}

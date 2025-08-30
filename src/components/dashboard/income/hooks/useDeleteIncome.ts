@@ -14,8 +14,7 @@ const useDeleteIncome = () => {
 		},
 	});
 
-	const deleteHandler = (incomeId: string) =>
-		confirm("Вы точно хотите удалить доход?") && deleteIncome(incomeId);
+	const deleteHandler = (incomeId: string) => deleteIncome(incomeId);
 
 	return { deleteHandler };
 };

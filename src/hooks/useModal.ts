@@ -1,25 +1,23 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const useModal = (initialOpen = false) => {
 	const [isOpen, setIsOpen] = useState(initialOpen);
 
-	const open = useCallback(() => {
-		document.body.style.overflow = "hidden";
-		setIsOpen(true);
-	}, []);
+	const open = useCallback(() => setIsOpen(true), []);
+	const close = useCallback(() => setIsOpen(false), []);
+	const toggle = useCallback(() => setIsOpen((prev) => !prev), []);
 
-	const close = useCallback(() => {
-		document.body.style.overflow = "";
-		setIsOpen(false);
-	}, []);
+	useEffect(() => {
+		if (isOpen) {
+			document.body.style.overflow = "hidden";
+		} else {
+			document.body.style.overflow = "";
+		}
 
-	const toggle = useCallback(() => {
-		setIsOpen((prev) => {
-			const next = !prev;
-			document.body.style.overflow = next ? "hidden" : "";
-			return next;
-		});
-	}, []);
+		return () => {
+			document.body.style.overflow = "";
+		};
+	}, [isOpen]);
 
 	return { isOpen, open, close, toggle };
 };
