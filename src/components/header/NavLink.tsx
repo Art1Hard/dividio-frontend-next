@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import cn from "clsx";
 import Link from "next/link";
 
 interface NavLinkProps {
@@ -11,10 +10,7 @@ interface NavLinkProps {
 
 const NavLink = ({ href, children, className, title }: NavLinkProps) => {
 	return (
-		<Link
-			title={title}
-			href={href}
-			className={cn(" hover:text-accent transition-colors", className)}>
+		<Link title={title} href={href} className={className}>
 			{children}
 		</Link>
 	);

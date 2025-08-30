@@ -13,7 +13,7 @@ const DashboardHead = () => {
 				</span>
 				<span className="sm:hidden">Ваш Дашборд</span>
 			</h1>
-			<p className="text-black/70 hidden sm:block">
+			<p className="text-subtitle/70 hidden sm:block dark:text-subtitle">
 				Ваш финансовый обзор на сегодня
 			</p>
 		</div>

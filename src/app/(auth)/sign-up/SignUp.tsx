@@ -51,7 +51,7 @@ const SignUp = () => {
 						sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITEKEY as string}
 						onSuccess={(tokenValue) => token.setCaptchaToken(tokenValue)}
 						onError={token.clearCaptchaToken}
-						theme="light"
+						theme="auto"
 					/>
 				</div>
 
