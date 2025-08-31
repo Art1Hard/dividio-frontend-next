@@ -1,4 +1,4 @@
-export const progressColors: Record<string, string> = {
+export const allocationColors: Record<string, string> = {
 	gray: "#6b7280",
 	green: "#10B981",
 	blue: "#3B82F6",

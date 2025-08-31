@@ -7,7 +7,7 @@ import {
 	type TooltipProps,
 } from "recharts";
 import useFetchAllocations from "@/hooks/useFetchAllocations";
-import { progressColors } from "@/constants/colors";
+import { allocationColors } from "@/constants/colors";
 import { IAllocation } from "@/types/allocation.types";
 import useBreakpoint from "@/hooks/useBreakpoint";
 
@@ -39,7 +39,7 @@ const AllocationChart = () => {
 						{allocations.map((allocation) => (
 							<Cell
 								key={allocation.id}
-								fill={progressColors[allocation.color]}
+								fill={allocationColors[allocation.color]}
 							/>
 						))}
 					</Pie>

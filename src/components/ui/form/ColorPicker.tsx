@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 import type { FieldError } from "react-hook-form";
 import cn from "clsx";
-import { progressColors } from "@/constants/colors";
+import { allocationColors } from "@/constants/colors";
 
 interface ColorPickerProps {
 	selectedColor: string;
@@ -14,7 +14,7 @@ const ColorPicker = forwardRef<HTMLInputElement, ColorPickerProps>(
 			<div>
 				<label className="block mb-2 text-sm font-medium">Выберите цвет</label>
 				<div className="relative flex gap-3 overflow-x-auto scrollbar">
-					{Object.keys(progressColors).map((color) => (
+					{Object.keys(allocationColors).map((color) => (
 						<label key={color} className="cursor-pointer">
 							<input
 								type="radio"
@@ -31,7 +31,7 @@ const ColorPicker = forwardRef<HTMLInputElement, ColorPickerProps>(
 										: "border-transparent",
 									`bg-${color}-500`
 								)}
-								style={{ backgroundColor: progressColors[color] }}
+								style={{ backgroundColor: allocationColors[color] }}
 								title={color}></div>
 						</label>
 					))}
