@@ -10,7 +10,7 @@ const useFetchAllocations = (): IAsyncQuery<IAllocation> => {
 		queryFn: () => allocationService.getAll(),
 	});
 
-	return { data: data?.allocations, isLoading, isError };
+	return { data, isLoading, isError };
 };
 
 export default useFetchAllocations;

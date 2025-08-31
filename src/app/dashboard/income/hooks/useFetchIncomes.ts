@@ -10,7 +10,7 @@ const useFetchIncomes = (): IAsyncQuery<IIncome> => {
 		queryFn: () => incomeService.getAll(),
 	});
 
-	return { data: data?.incomes, isLoading, isError };
+	return { data, isLoading, isError };
 };
 
 export default useFetchIncomes;

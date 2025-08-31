@@ -1,6 +1,6 @@
 import { axiosWithAuth } from "@/api/interceptors";
 import { AllocationSchema } from "@/components/dashboard/allocation/models/allocation.schema";
-import { IAllocation, IAllocationData } from "@/types/allocation.types";
+import { IAllocation } from "@/types/allocation.types";
 
 export interface IEditAllocation {
 	id: string;
@@ -11,7 +11,7 @@ class AllocationService {
 	private BASE_URL = "allocation";
 
 	async getAll() {
-		const response = await axiosWithAuth.get<IAllocationData>(this.BASE_URL);
+		const response = await axiosWithAuth.get<IAllocation[]>(this.BASE_URL);
 		return response.data;
 	}
 

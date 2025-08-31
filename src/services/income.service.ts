@@ -1,12 +1,12 @@
 import { axiosWithAuth } from "@/api/interceptors";
 import { IncomeSchema } from "@/components/dashboard/income/models/income.schema";
-import { IIncome, IIncomeData } from "@/types/income.types";
+import { IIncome } from "@/types/income.types";
 
 class IncomeService {
 	private BASE_URL = "income";
 
 	async getAll() {
-		const response = await axiosWithAuth.get<IIncomeData>(this.BASE_URL);
+		const response = await axiosWithAuth.get<IIncome[]>(this.BASE_URL);
 		return response.data;
 	}
 
