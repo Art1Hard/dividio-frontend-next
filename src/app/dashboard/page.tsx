@@ -4,7 +4,7 @@ import { NO_INDEX_PAGE } from "@/constants/seo.constants";
 import Dashboard from "./Dashboard";
 
 export const metadata: Metadata = {
-	title: "Dashboard",
+	title: "Дашборд",
 	...NO_INDEX_PAGE,
 };
 

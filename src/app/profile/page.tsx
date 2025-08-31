@@ -3,7 +3,7 @@ import { NO_INDEX_PAGE } from "@/constants/seo.constants";
 import Profile from "./Profile";
 
 export const metadata: Metadata = {
-	title: "Profile",
+	title: "Профиль",
 	...NO_INDEX_PAGE,
 };
 

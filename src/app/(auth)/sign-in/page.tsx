@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import SignIn from "./SignIn";
 
 export const metadata: Metadata = {
-	title: "SignIn",
+	title: "Вход",
 	...NO_INDEX_PAGE,
 };
 
