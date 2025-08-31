@@ -1,14 +1,19 @@
-import { IAllocation } from "@/types/allocation.types";
+import AsyncList from "@/components/AsyncList";
+import DashboardWidgetItemSkeleton from "@/components/ui/skeletons/DashboardWidgetItemSkeleton";
+import useFetchAllocations from "@/hooks/useFetchAllocations";
 import AllocationItem from "./AllocationItem";
-import { AnimatePresence } from "framer-motion";
 
-const AllocationList = ({ data }: { data: IAllocation[] }) => {
+const AllocationList = () => {
+	const allocationQuery = useFetchAllocations();
+
 	return (
-		<AnimatePresence>
-			{data.map((item) => (
-				<AllocationItem key={item.id} item={item} />
-			))}
-		</AnimatePresence>
+		<AsyncList
+			query={allocationQuery}
+			loader={<DashboardWidgetItemSkeleton count={3} />}
+			renderItem={(allocation) => (
+				<AllocationItem key={allocation.id} item={allocation} />
+			)}
+		/>
 	);
 };
 

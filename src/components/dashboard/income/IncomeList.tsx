@@ -2,21 +2,18 @@
 
 import useFetchIncomes from "@/app/dashboard/income/hooks/useFetchIncomes";
 import IncomeItem from "./IncomeItem";
-import { AnimatePresence, motion } from "framer-motion";
-import { dashboardWidgetItemAnimation } from "@/constants/animation.constants";
+import AsyncList from "@/components/AsyncList";
+import DashboardWidgetItemSkeleton from "@/components/ui/skeletons/DashboardWidgetItemSkeleton";
 
 const IncomeList = () => {
-	const { incomeData } = useFetchIncomes();
+	const incomeQuery = useFetchIncomes();
 
 	return (
-		<div className="space-y-5">
-			<AnimatePresence>
-				{incomeData &&
-					incomeData.incomes.map((income) => (
-						<IncomeItem key={income.id} income={income} />
-					))}
-			</AnimatePresence>
-		</div>
+		<AsyncList
+			query={incomeQuery}
+			loader={<DashboardWidgetItemSkeleton count={2} />}
+			renderItem={(income) => <IncomeItem key={income.id} income={income} />}
+		/>
 	);
 };
 

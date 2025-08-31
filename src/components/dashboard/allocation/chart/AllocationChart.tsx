@@ -13,9 +13,9 @@ import useBreakpoint from "@/hooks/useBreakpoint";
 
 const AllocationChart = () => {
 	const breakpoint = useBreakpoint();
-	const { allocationData } = useFetchAllocations();
+	const { data: allocations } = useFetchAllocations();
 
-	if (!allocationData) return null;
+	if (!allocations) return null;
 
 	return (
 		<div className="h-[320px] w-full">
@@ -26,7 +26,7 @@ const AllocationChart = () => {
 						animationBegin={0}
 						animationDuration={600}
 						stroke="#fff"
-						data={allocationData.allocations}
+						data={allocations}
 						cx="50%"
 						cy="50%"
 						outerRadius={125}
@@ -36,7 +36,7 @@ const AllocationChart = () => {
 								? (allocation: IAllocation) => allocation.title
 								: undefined
 						}>
-						{allocationData.allocations.map((allocation) => (
+						{allocations.map((allocation) => (
 							<Cell
 								key={allocation.id}
 								fill={progressColors[allocation.color]}

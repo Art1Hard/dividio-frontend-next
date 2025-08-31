@@ -1,15 +1,23 @@
 import { IconType } from "react-icons";
 import { motion, useReducedMotion } from "framer-motion";
 import { itemVariants } from "@/constants/animation.constants";
+import StatisticItemSkeleton from "@/components/ui/skeletons/StatisticItemSkeleton";
 
 interface StatisticItemProps {
 	title: string;
-	postfix?: string;
 	content: string;
 	icon: IconType;
+	loading: boolean;
 }
 
-const StatisticItem = ({ title, content, icon }: StatisticItemProps) => {
+const StatisticItem = ({
+	title,
+	content,
+	icon,
+	loading,
+}: StatisticItemProps) => {
+	if (loading) return <StatisticItemSkeleton />;
+
 	const shouldReduceMotion = useReducedMotion();
 	const Icon = icon;
 

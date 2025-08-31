@@ -9,7 +9,9 @@ const IncomeWidget = () => {
 			title="Все доходы"
 			icon={<AiFillGold size={24} className="text-amber-500" />}
 			headerButton={<CreateIncome />}>
-			<IncomeList />
+			<div className="space-y-5">
+				<IncomeList />
+			</div>
 		</DashboardWidgetWrapper>
 	);
 };
