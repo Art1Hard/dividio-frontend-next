@@ -67,7 +67,7 @@ const Input = <FormData extends FieldValues>({
 					<button
 						onClick={() => setIsShowPassword((prev) => !prev)}
 						type="button"
-						className="cursor-pointer absolute right-3 top-[50%] translate-y-[-50%] text-secondary-700 hover:text-black"
+						className="cursor-pointer absolute right-3 top-[50%] translate-y-[-50%] text-secondary-700 hover:text-black dark:hover:text-white"
 						aria-label="Показать или скрыть пароль">
 						{!isShowPassword ? <OpenedEyeIcon /> : <ClosedEyeIcon />}
 					</button>
