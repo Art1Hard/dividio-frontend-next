@@ -1,10 +1,13 @@
 import { useForm } from "react-hook-form";
-import useInitialData from "./useInitialData";
 import useWarnUnsavedChanges from "@/hooks/useWarnUnsavedChanges";
 import useUpdateProfile from "./useUpdateProfile";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { UserSchema, userSchema } from "@/app/profile/models/user.schema";
+import {
+	UserSchema,
+	userSchema,
+} from "@/components/profile/models/user.schema";
 import { isServerError } from "@/utils/server-error.utils";
+import useInitialData from "./useInitialData";
 
 const useProfileForm = () => {
 	const { updateProfileAsync, isPending } = useUpdateProfile();

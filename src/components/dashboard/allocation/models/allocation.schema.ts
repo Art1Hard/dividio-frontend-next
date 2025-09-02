@@ -6,7 +6,7 @@ export const allocationSchema = z.object({
 		.int("Введите целое число")
 		.min(5, "Число не может быть меньше 5")
 		.max(100, "Число не может быть больше 100"),
-	color: z.string().nonempty("Поле не может быть пустым"),
+	colorId: z.string().nonempty("Поле не может быть пустым"),
 });
 
 export type AllocationSchema = z.infer<typeof allocationSchema>;

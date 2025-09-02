@@ -1,5 +1,5 @@
 import useProfile from "@/hooks/useProfile";
-import { UserSchema } from "@/app/profile/models/user.schema";
+import { UserSchema } from "@/components/profile/models/user.schema";
 import { useEffect } from "react";
 import { UseFormReset } from "react-hook-form";
 

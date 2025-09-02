@@ -33,8 +33,8 @@ const CreateAllocationForm = ({ onClose }: CreateAllocationFormProps) => {
 
 			<ColorPicker
 				selectedColor={states.selectedColor}
-				{...register("color")}
-				error={states.errors.color}
+				{...register("colorId")}
+				error={states.errors.colorId}
 			/>
 
 			<SubmitButton disabled={!states.isDirty || states.isPending}>

@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 import type { FieldError } from "react-hook-form";
 import cn from "clsx";
-import { allocationColors } from "@/constants/colors";
+import useProfile from "@/hooks/useProfile";
 
 interface ColorPickerProps {
 	selectedColor: string;
@@ -10,15 +10,17 @@ interface ColorPickerProps {
 
 const ColorPicker = forwardRef<HTMLInputElement, ColorPickerProps>(
 	({ selectedColor, error, ...rest }, ref) => {
+		const { profile, states } = useProfile();
+
 		return (
 			<div>
 				<label className="block mb-2 text-sm font-medium">Выберите цвет</label>
 				<div className="relative flex gap-3 overflow-x-auto scrollbar">
-					{Object.keys(allocationColors).map((color) => (
-						<label key={color} className="cursor-pointer">
+					{profile?.colors.map((color) => (
+						<label key={color.id} className="cursor-pointer">
 							<input
 								type="radio"
-								value={color}
+								value={color.id}
 								ref={ref}
 								{...rest}
 								className="sr-only"
@@ -26,13 +28,13 @@ const ColorPicker = forwardRef<HTMLInputElement, ColorPickerProps>(
 							<div
 								className={cn(
 									"w-8 h-8 rounded-full border-2 transition",
-									selectedColor === color
+									selectedColor === color.id
 										? "border-secondary-700"
-										: "border-transparent",
-									`bg-${color}-500`
+										: "border-transparent"
 								)}
-								style={{ backgroundColor: allocationColors[color] }}
-								title={color}></div>
+								style={{ backgroundColor: color.value }}
+								title={color.name}
+							/>
 						</label>
 					))}
 

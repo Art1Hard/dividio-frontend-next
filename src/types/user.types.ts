@@ -1,8 +1,10 @@
+import { IAllocationColor } from "./allocation.types";
+
 export interface IUser {
 	id: string;
 	email: string;
 	name?: string;
-	password: string;
+	colors: IAllocationColor[];
 }
 
 export type TypeUserFormState = Partial<Omit<IUser, "id">>;

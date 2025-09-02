@@ -16,7 +16,7 @@ const AllocationItem = ({ item }: AllocationItemProps) => {
 					label={item.title}
 					percent={item.percentage}
 					amount={item.amount}
-					color={item.color}
+					color={item.color.value}
 				/>
 			</DashboardWidgetItem.Header>
 			<DashboardWidgetItem.Content>

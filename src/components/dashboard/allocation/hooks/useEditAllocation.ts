@@ -27,9 +27,9 @@ const useEditAllocation = (
 	} = useForm<AllocationSchema>({
 		resolver: zodResolver(allocationSchema),
 		mode: "onTouched",
-		defaultValues: allocation,
+		defaultValues: { ...allocation, colorId: allocation.color.id },
 	});
-	const selectedColor = watch("color");
+	const selectedColor = watch("colorId");
 	useWarnUnsavedChanges(isDirty);
 
 	const queryClient = useQueryClient();

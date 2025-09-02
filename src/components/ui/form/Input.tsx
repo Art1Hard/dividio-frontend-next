@@ -9,6 +9,7 @@ import {
 	UseFormRegister,
 } from "react-hook-form";
 import clsx from "clsx";
+import { HexColorInput } from "react-colorful";
 
 interface InputProps<FormData extends FieldValues>
 	extends InputHTMLAttributes<HTMLInputElement> {
@@ -18,6 +19,8 @@ interface InputProps<FormData extends FieldValues>
 	label?: string;
 	enableShowPassword?: boolean;
 	rootClassName?: string;
+	color?: string;
+	onColorChange?: (newColor: string) => void;
 }
 
 const Input = <FormData extends FieldValues>({
@@ -29,10 +32,18 @@ const Input = <FormData extends FieldValues>({
 	rootClassName,
 	type = "text",
 	className,
+	color,
+	onColorChange,
 	...props
 }: InputProps<FormData>) => {
 	const error = errors?.[name]?.message as string | undefined;
 	const [isShowPassword, setIsShowPassword] = useState(false);
+	const inputClassName = clsx(
+		"w-full px-4 py-2 rounded-lg bg-primary-300/50 focus:outline-none focus:ring-2 focus:ring-accent placeholder:text-secondary-500 border placeholder:text-base",
+		error ? "border-red-500" : "border-primary-400",
+		type === "password" && "pr-10",
+		className
+	);
 
 	return (
 		<div className={rootClassName}>
@@ -45,23 +56,28 @@ const Input = <FormData extends FieldValues>({
 			)}
 
 			<div className="relative">
-				<input
-					type={
-						type === "password"
-							? isShowPassword
-								? "text"
-								: "password"
-							: "text"
-					}
-					className={clsx(
-						"w-full px-4 py-2 rounded-lg bg-primary-300/50 focus:outline-none focus:ring-2 focus:ring-accent placeholder:text-secondary-500 border placeholder:text-base",
-						error ? "border-red-500" : "border-primary-400",
-						type === "password" && "pr-10",
-						className
-					)}
-					{...props}
-					{...register(name, { valueAsNumber: type === "number" })}
-				/>
+				{type === "color" ? (
+					<HexColorInput
+						id="colorValue"
+						className={inputClassName}
+						color={color}
+						onChange={onColorChange}
+						prefixed
+					/>
+				) : (
+					<input
+						type={
+							type === "password"
+								? isShowPassword
+									? "text"
+									: "password"
+								: "text"
+						}
+						className={inputClassName}
+						{...register(name, { valueAsNumber: type === "number" })}
+						{...props}
+					/>
+				)}
 
 				{type === "password" && enableShowPassword && (
 					<button

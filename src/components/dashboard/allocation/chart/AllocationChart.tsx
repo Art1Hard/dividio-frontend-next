@@ -7,7 +7,6 @@ import {
 	type TooltipProps,
 } from "recharts";
 import useFetchAllocations from "@/hooks/useFetchAllocations";
-import { allocationColors } from "@/constants/colors";
 import { IAllocation } from "@/types/allocation.types";
 import useBreakpoint from "@/hooks/useBreakpoint";
 
@@ -37,10 +36,7 @@ const AllocationChart = () => {
 								: undefined
 						}>
 						{allocations.map((allocation) => (
-							<Cell
-								key={allocation.id}
-								fill={allocationColors[allocation.color]}
-							/>
+							<Cell key={allocation.id} fill={allocation.color.value} />
 						))}
 					</Pie>
 					<Tooltip content={<CustomTooltip />} />

@@ -21,13 +21,13 @@ const useCreateAllocation = (closeCallback: () => void) => {
 	} = useForm<AllocationSchema>({
 		resolver: zodResolver(allocationSchema),
 		mode: "onTouched",
-		defaultValues: { percentage: 5, title: "", color: "gray" },
+		defaultValues: { percentage: 5, title: "", colorId: "" },
 	});
-	const selectedColor = watch("color");
+	const selectedColor = watch("colorId");
 	useWarnUnsavedChanges(isDirty);
 
 	const queryClient = useQueryClient();
-	const { mutate: createIncome, isPending } = useMutation({
+	const { mutate: createAllocation, isPending } = useMutation({
 		mutationFn: (data: AllocationSchema) => allocationService.create(data),
 		onSuccess: async (data) => {
 			await queryClient.invalidateQueries({ queryKey: financeQueryKeys.all });
@@ -47,7 +47,10 @@ const useCreateAllocation = (closeCallback: () => void) => {
 		},
 	});
 
-	const submit = handleSubmit((data) => createIncome(data));
+	const submit = handleSubmit((data) => {
+		console.log(data);
+		createAllocation(data);
+	});
 
 	return {
 		register,

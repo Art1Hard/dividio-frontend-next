@@ -1,7 +1,6 @@
 import { type FC } from "react";
 import cn from "clsx";
 import useDelayValue from "@/hooks/useDelayValue";
-import { allocationColors } from "@/constants/colors";
 
 type ProgressBarProps = {
 	label: string;
@@ -14,10 +13,9 @@ const ProgressBar: FC<ProgressBarProps> = ({
 	label,
 	percent = 0,
 	amount = 0,
-	color = "gray",
+	color = "#64748b",
 }) => {
 	const delayedPercent = useDelayValue(percent);
-	const progressColor = allocationColors[color];
 
 	return (
 		<div className="sm:pb-4">
@@ -32,7 +30,7 @@ const ProgressBar: FC<ProgressBarProps> = ({
 				<div
 					className={cn("h-full transition-all duration-300")}
 					style={{
-						backgroundColor: `${progressColor}`,
+						backgroundColor: color,
 						width: `${delayedPercent}%`,
 					}}></div>
 			</div>
