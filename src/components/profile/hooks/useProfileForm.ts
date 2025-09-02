@@ -34,7 +34,7 @@ const useProfileForm = () => {
 			reset({ email: payload.email, name: payload.name, password: "" });
 		} catch (e) {
 			if (isServerError(e)) {
-				switch (e.response.data.message) {
+				switch (e.response?.data.message) {
 					case "This email is already taken":
 						setError("email", {
 							type: "server",
