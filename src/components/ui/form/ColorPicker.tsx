@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 import type { FieldError } from "react-hook-form";
-import cn from "clsx";
 import useProfile from "@/hooks/useProfile";
+import { hexToRgb } from "@/utils/hexToRgb";
 
 interface ColorPickerProps {
 	selectedColor: string;
@@ -14,8 +14,8 @@ const ColorPicker = forwardRef<HTMLInputElement, ColorPickerProps>(
 
 		return (
 			<div>
-				<label className="block mb-2 text-sm font-medium">Выберите цвет</label>
-				<div className="relative flex gap-3 overflow-x-auto scrollbar">
+				<label className="block text-sm font-medium">Выберите цвет</label>
+				<div className="relative flex gap-2 overflow-x-auto p-2 scrollbar">
 					{profile?.colors.map((color) => (
 						<label key={color.id} className="cursor-pointer">
 							<input
@@ -26,13 +26,14 @@ const ColorPicker = forwardRef<HTMLInputElement, ColorPickerProps>(
 								className="sr-only"
 							/>
 							<div
-								className={cn(
-									"w-8 h-8 rounded-full border-2 transition",
-									selectedColor === color.id
-										? "border-secondary-700"
-										: "border-transparent"
-								)}
-								style={{ backgroundColor: color.value }}
+								className="w-9 h-9 rounded-full"
+								style={{
+									backgroundColor: color.value,
+									boxShadow:
+										selectedColor === color.id
+											? `0 0 5px 1px rgba(${hexToRgb(color.value)}, 0.7)`
+											: "none",
+								}}
 								title={color.name}
 							/>
 						</label>
