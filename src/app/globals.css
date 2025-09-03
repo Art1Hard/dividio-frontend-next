@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "react-contexify/ReactContexify.css";
 
 @theme {
 	--color-primary-100: #f1f5f9;
@@ -36,6 +37,14 @@
 
 		--color-subtitle: #94a3b8;
 	}
+}
+
+/** Contexify **/
+:root {
+	--contexify-menu-bgColor: var(--color-primary-100);
+	--contexify-item-color: var(--color-secondary-700);
+	--contexify-activeItem-color: var(--color-secondary-950);
+	--contexify-activeItem-bgColor: var(--color-primary-200);
 }
 
 body {

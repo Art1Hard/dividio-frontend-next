@@ -1,6 +1,6 @@
 import useProfile from "@/hooks/useProfile";
-import { LuPlus } from "react-icons/lu";
 import CreateAllocationColor from "./allocation-color/create/CreateAllocationColor";
+import AllocationColorItem from "./allocation-color/AllocationColorItem";
 
 const Settings = () => {
 	const { profile } = useProfile();
@@ -13,11 +13,7 @@ const Settings = () => {
 			<div className="flex gap-2 overflow-x-auto">
 				<CreateAllocationColor />
 				{profile?.colors.map((color) => (
-					<div
-						key={color.id}
-						className="w-9 h-9 rounded-full shrink-0"
-						style={{ backgroundColor: color.value }}
-					/>
+					<AllocationColorItem key={color.id} color={color} />
 				))}
 			</div>
 		</>

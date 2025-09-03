@@ -12,6 +12,7 @@ import {
 	financeQueryKeys,
 	profileQueryKey,
 } from "@/constants/query-keys.constants";
+import { useEffect, useState } from "react";
 
 const useCreateAllocationColorForm = (closeCallback: () => void) => {
 	const queryClient = useQueryClient();
@@ -39,9 +40,20 @@ const useCreateAllocationColorForm = (closeCallback: () => void) => {
 
 	useWarnUnsavedChanges(isDirty);
 
+	const [color, setColor] = useState("#fff");
+
+	useEffect(() => {
+		setValue("value", color, { shouldDirty: true, shouldValidate: true });
+	}, [color, setValue]);
+
 	const submit = handleSubmit((data: AllocationColorSchema) => mutate(data));
 
-	return { register, submit, setValue, states: { errors, isDirty } };
+	return {
+		register,
+		submit,
+		setValue,
+		states: { errors, isDirty, color: { value: color, setValue: setColor } },
+	};
 };
 
 export default useCreateAllocationColorForm;

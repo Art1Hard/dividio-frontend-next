@@ -18,7 +18,7 @@ const ConfirmDialog = ({
 
 	return createPortal(
 		<div
-			className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center px-4 cursor-pointer"
+			className="fixed inset-0 bg-black/50 z-667 flex items-center justify-center px-4 cursor-pointer"
 			onClick={onClose}>
 			<div
 				className="bg-slate-200 dark:bg-slate-800 rounded-xl p-6 max-w-md w-full shadow-lg cursor-default"

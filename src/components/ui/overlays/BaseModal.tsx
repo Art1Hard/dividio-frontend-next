@@ -33,7 +33,7 @@ const BaseModal = ({
 	return createPortal(
 		<AnimatePresence>
 			<div
-				className="fixed inset-0 bg-black/50 flex justify-center overflow-y-auto z-50 cursor-pointer p-4"
+				className="fixed inset-0 bg-black/50 flex justify-center overflow-y-auto z-667 cursor-pointer p-4"
 				onMouseDown={overlayMouseDown}
 				onMouseUp={overlayMouseUp}>
 				<div className="bg-primary-200 p-4 pt-16 h-fit my-auto rounded-xl w-full max-w-md relative cursor-auto">
