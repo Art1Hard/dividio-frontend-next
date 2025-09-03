@@ -21,7 +21,6 @@ const AllocationColorItem = ({ color }: AllocationColorItemProps) => {
 	return (
 		<>
 			<button
-				onTouchEnd={contextMenuHandler}
 				onContextMenu={contextMenuHandler}
 				className="w-9 h-9 rounded-full shrink-0 cursor-pointer"
 				style={{ backgroundColor: color.value }}
