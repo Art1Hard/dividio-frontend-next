@@ -20,8 +20,8 @@ const AllocationItem = ({ item }: AllocationItemProps) => {
 				/>
 			</DashboardWidgetItem.Header>
 			<DashboardWidgetItem.Content>
-				<EditAllocation item={item} />{" "}
-				<DeleteAllocation allocationId={item.id} />
+				<EditAllocation item={item} />
+				<DeleteAllocation id={item.id} title={item.title} />
 			</DashboardWidgetItem.Content>
 		</DashboardWidgetItem>
 	);

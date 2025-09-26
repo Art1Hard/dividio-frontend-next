@@ -14,7 +14,7 @@ const IncomeItem = ({ income }: { income: IIncome }) => {
 			</DashboardWidgetItem.Header>
 			<DashboardWidgetItem.Content>
 				<EditIncome income={income} />
-				<DeleteIncome id={income.id} />
+				<DeleteIncome id={income.id} title={income.title} />
 			</DashboardWidgetItem.Content>
 		</DashboardWidgetItem>
 	);

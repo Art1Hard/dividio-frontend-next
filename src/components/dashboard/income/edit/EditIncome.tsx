@@ -12,10 +12,7 @@ const EditIncome = ({ income }: { income: IIncome }) => {
 		<>
 			<EditButton onClick={open} />
 
-			<BaseModal
-				isOpen={isOpen}
-				onClose={close}
-				title={`Редактировать доход «${income.title}»`}>
+			<BaseModal isOpen={isOpen} onClose={close} title="Редактировать доход">
 				<EditIncomeForm onClose={close} income={income} />
 			</BaseModal>
 		</>

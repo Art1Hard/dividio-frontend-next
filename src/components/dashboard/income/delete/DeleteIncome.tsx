@@ -3,7 +3,12 @@ import DeleteButton from "@/components/ui/buttons/DeleteButton";
 import ConfirmDialog from "@/components/ui/overlays/ConfirmDialog";
 import useModal from "@/hooks/useModal";
 
-const DeleteIncome = ({ id }: { id: string }) => {
+interface DeleteIncomeProps {
+	id: string;
+	title: string;
+}
+
+const DeleteIncome = ({ id, title }: DeleteIncomeProps) => {
 	const { isOpen, open, close } = useModal();
 	const { deleteHandler } = useDeleteIncome();
 
@@ -14,7 +19,7 @@ const DeleteIncome = ({ id }: { id: string }) => {
 				isOpen={isOpen}
 				onClose={close}
 				onConfirm={() => deleteHandler(id)}
-				title="Удаление дохода"
+				title={`Удалить доход «${title}»?`}
 			/>
 		</>
 	);
