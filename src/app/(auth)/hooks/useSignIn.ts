@@ -28,7 +28,7 @@ const useSignIn = () => {
 			toast.success("Вы успешно вошли в аккаунт");
 		} catch (e) {
 			if (isServerError(e)) {
-				switch (e.response.data.message) {
+				switch (e.response!.data.message) {
 					case "Invalid password":
 						setError("password", {
 							type: "server",

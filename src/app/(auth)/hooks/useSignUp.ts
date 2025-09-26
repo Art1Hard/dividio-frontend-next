@@ -40,7 +40,7 @@ const useSignUp = () => {
 			toast.success("Вы успешно зарегистрировались");
 		} catch (e) {
 			if (isServerError(e)) {
-				switch (e.response.data.message) {
+				switch (e.response!.data.message) {
 					case "User with this email is already exist":
 						setError("email", {
 							type: "server",
