@@ -1,16 +1,22 @@
 import { IAllocationColor } from "@/types/allocation.types";
-import { MouseEvent, TouchEvent } from "react";
-import { Menu, Item, useContextMenu } from "react-contexify";
+import { Menu, Item } from "react-contexify";
 import { FiEdit2, FiTrash2 } from "react-icons/fi";
 import DeleteAllocationColor from "./delete/DeleteAllocationColor";
 import useModal from "@/hooks/useModal";
 import useMenu from "./hooks/useMenu";
+import EditAllocationColorForm from "./edit/EditAllocationColorForm";
+import BaseModal from "@/components/ui/overlays/BaseModal";
 
 interface AllocationColorItemProps {
 	color: IAllocationColor;
 }
 
 const AllocationColorItem = ({ color }: AllocationColorItemProps) => {
+	const {
+		isOpen: isOpenModal,
+		open: openModal,
+		close: closeModal,
+	} = useModal();
 	const {
 		isOpen: isOpenDialog,
 		open: openDialog,
@@ -26,7 +32,7 @@ const AllocationColorItem = ({ color }: AllocationColorItemProps) => {
 				style={{ backgroundColor: color.value }}
 			/>
 			<Menu animation={false} id={menuId}>
-				<Item onClick={() => alert(`Редактировать ${color.name}`)}>
+				<Item onClick={openModal}>
 					<FiEdit2 size={16} />
 					<span className="ml-2">Редактировать</span>
 				</Item>
@@ -35,6 +41,13 @@ const AllocationColorItem = ({ color }: AllocationColorItemProps) => {
 					<span className="ml-2">Удалить</span>
 				</Item>
 			</Menu>
+
+			<BaseModal
+				isOpen={isOpenModal}
+				onClose={closeModal}
+				title="Редактировать цвет">
+				<EditAllocationColorForm colorItem={color} onClose={closeModal} />
+			</BaseModal>
 
 			<DeleteAllocationColor
 				id={color.id}

@@ -11,15 +11,19 @@ import {
 	profileQueryKey,
 } from "@/constants/query-keys.constants";
 import useAppForm from "@/hooks/useAppForm";
+import { IAllocationColor } from "@/types/allocation.types";
 
-const useCreateAllocationColorForm = (closeCallback: () => void) => {
+const useEditAllocationColor = (
+	colorItem: IAllocationColor,
+	closeCallback: () => void
+) => {
 	const queryClient = useQueryClient();
 
 	const { mutate } = useMutation({
 		mutationFn: (data: AllocationColorSchema) =>
-			allocationColorService.create(data),
+			allocationColorService.edit({ id: colorItem.id, data }),
 		onSuccess: (response) => {
-			toast.success(`Цвет «${response.name}» успешно добавлен`);
+			toast.success(`Цвет «${response.name}» был успешно изменен`);
 			queryClient.invalidateQueries({ queryKey: [financeQueryKeys.all] });
 			queryClient.invalidateQueries({ queryKey: [profileQueryKey] });
 			closeCallback();
@@ -33,7 +37,7 @@ const useCreateAllocationColorForm = (closeCallback: () => void) => {
 		watch,
 		formState: { isDirty, errors },
 	} = useAppForm<AllocationColorSchema>(allocationColorSchema, {
-		defaultValues: { name: "", value: "#fff" },
+		defaultValues: colorItem,
 	});
 
 	useWarnUnsavedChanges(isDirty);
@@ -53,4 +57,4 @@ const useCreateAllocationColorForm = (closeCallback: () => void) => {
 	};
 };
 
-export default useCreateAllocationColorForm;
+export default useEditAllocationColor;
