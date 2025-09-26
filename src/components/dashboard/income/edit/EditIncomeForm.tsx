@@ -32,7 +32,9 @@ const EditIncomeForm = ({ onClose, income }: EditIncomeFormProps) => {
 				errors={states.errors}
 			/>
 
-			<SubmitButton disabled={!states.isDirty || states.isPending}>
+			<SubmitButton
+				className="mt-4"
+				disabled={!states.isDirty || states.isPending}>
 				{states.isPending ? "Добавление..." : "Добавить"}
 			</SubmitButton>
 		</form>
