@@ -5,6 +5,7 @@ import SwitchFormLink from "@/components/ui/auth/SwitchFormLink";
 import BaseButton from "@/components/ui/buttons/BaseButton";
 import Input from "@/components/ui/form/Input";
 import useSignIn from "../hooks/useSignIn";
+import { ROUTES } from "@/config/routes.config";
 
 const SignIn = () => {
 	const {
@@ -45,7 +46,7 @@ const SignIn = () => {
 				</BaseButton>
 			</form>
 
-			<SwitchFormLink prefix="Нет аккаунта?" href="/sign-up">
+			<SwitchFormLink prefix="Нет аккаунта?" href={ROUTES.SIGN_UP}>
 				Зарегистрироваться
 			</SwitchFormLink>
 		</AuthFormCover>
