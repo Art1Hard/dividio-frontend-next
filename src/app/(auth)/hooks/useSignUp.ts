@@ -9,7 +9,9 @@ const useSignUp = () => {
 	const {
 		authAsync,
 		statuses: { isPending },
-	} = useAuth("register");
+	} = useAuth("register", {
+		onSuccessMessage: "Вы успешно зарегистрировались",
+	});
 
 	const {
 		register,
@@ -33,7 +35,6 @@ const useSignUp = () => {
 
 		try {
 			await authAsync({ user: payload, captchaToken: token });
-			toast.success("Вы успешно зарегистрировались");
 		} catch (e) {
 			if (isServerError(e)) {
 				switch (e.response!.data.message) {

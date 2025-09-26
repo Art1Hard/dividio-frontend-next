@@ -1,14 +1,13 @@
 import { SignInSchema, signInSchema } from "../models/sign-in.schema";
 import useAuth from "./useAuth";
 import { isServerError } from "@/utils/server-error.utils";
-import { toast } from "sonner";
 import useAppForm from "@/hooks/useAppForm";
 
 const useSignIn = () => {
 	const {
 		authAsync,
 		statuses: { isPending },
-	} = useAuth("login");
+	} = useAuth("login", { onSuccessMessage: "Вы успешно вошли в аккаунт" });
 
 	const {
 		register,
@@ -20,7 +19,6 @@ const useSignIn = () => {
 	const submit = handleSubmit(async (data) => {
 		try {
 			await authAsync(data);
-			toast.success("Вы успешно вошли в аккаунт");
 		} catch (e) {
 			if (isServerError(e)) {
 				switch (e.response!.data.message) {

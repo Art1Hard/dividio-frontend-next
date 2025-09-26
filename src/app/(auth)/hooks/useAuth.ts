@@ -4,10 +4,11 @@ import authService, { type AuthType } from "@/services/auth.service";
 import { ISignIn, ISignUp } from "@/types/auth.types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
-const useAuth = (type: AuthType) => {
+const useAuth = (type: AuthType, config: { onSuccessMessage: string }) => {
 	const queryClient = useQueryClient();
-	const { replace } = useRouter();
+	const { push } = useRouter();
 
 	const {
 		mutate: auth,
@@ -18,7 +19,8 @@ const useAuth = (type: AuthType) => {
 		mutationFn: (data: ISignIn | ISignUp) => authService.main(type, data),
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: [profileQueryKey] });
-			replace(ROUTES.DASHBOARD);
+			push(ROUTES.DASHBOARD);
+			toast.success(config.onSuccessMessage);
 		},
 	});
 
