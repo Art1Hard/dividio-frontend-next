@@ -3,13 +3,20 @@
 import BaseButton from "@/components/ui/buttons/BaseButton";
 import useLogout from "./hooks/useLogout";
 import { LuCornerDownLeft, LuSettings2 } from "react-icons/lu";
-import { useState } from "react";
 import ProfileForm from "@/components/profile/ProfileForm";
 import Settings from "@/components/profile/settings/Settings";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const Profile = () => {
-	const [isSettings, setIsSettings] = useState(false);
+	const router = useRouter();
+	const searchParams = useSearchParams();
+	const isSettings = searchParams.get("tab") === "settings";
+
 	const { logout, isPending: isLogoutPending } = useLogout();
+
+	const toggleTab = () => {
+		router.push(`/profile${!isSettings ? "?tab=settings" : ""}`);
+	};
 
 	return (
 		<div className="flex-1 bg-primary-200 flex justify-center sm:bg-transparent py-8">
@@ -21,7 +28,7 @@ const Profile = () => {
 					<button
 						type="button"
 						className="flex flex-col items-center gap-1 text-secondary-700 hover:text-secondary-950 transition cursor-pointer p-2 sm:flex-row"
-						onClick={() => setIsSettings((prev) => (prev = !prev))}>
+						onClick={toggleTab}>
 						{isSettings ? (
 							<LuCornerDownLeft className="w-6 h-6 sm:w-4.5 sm:h-4.5" />
 						) : (
