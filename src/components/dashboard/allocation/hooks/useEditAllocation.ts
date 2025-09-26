@@ -1,9 +1,7 @@
-import { useForm } from "react-hook-form";
 import {
 	allocationSchema,
 	AllocationSchema,
 } from "../models/allocation.schema";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { isServerError } from "@/utils/server-error.utils";
 import { toast } from "sonner";
 import { financeQueryKeys } from "@/constants/query-keys.constants";
@@ -13,6 +11,7 @@ import allocationService, {
 } from "@/services/allocation.service";
 import useWarnUnsavedChanges from "@/hooks/useWarnUnsavedChanges";
 import { IAllocation } from "@/types/allocation.types";
+import useAppForm from "@/hooks/useAppForm";
 
 const useEditAllocation = (
 	allocation: IAllocation,
@@ -24,11 +23,10 @@ const useEditAllocation = (
 		watch,
 		setError,
 		formState: { errors, isDirty },
-	} = useForm<AllocationSchema>({
-		resolver: zodResolver(allocationSchema),
-		mode: "onTouched",
+	} = useAppForm<AllocationSchema>(allocationSchema, {
 		defaultValues: { ...allocation, colorId: allocation.color.id },
 	});
+
 	const selectedColor = watch("colorId");
 	useWarnUnsavedChanges(isDirty);
 

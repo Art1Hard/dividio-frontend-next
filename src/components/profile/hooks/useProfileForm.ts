@@ -1,13 +1,12 @@
-import { useForm } from "react-hook-form";
 import useWarnUnsavedChanges from "@/hooks/useWarnUnsavedChanges";
 import useUpdateProfile from "./useUpdateProfile";
-import { zodResolver } from "@hookform/resolvers/zod";
 import {
 	UserSchema,
 	userSchema,
 } from "@/components/profile/models/user.schema";
 import { isServerError } from "@/utils/server-error.utils";
 import useInitialData from "./useInitialData";
+import useAppForm from "@/hooks/useAppForm";
 
 const useProfileForm = () => {
 	const { updateProfileAsync, isPending } = useUpdateProfile();
@@ -18,10 +17,7 @@ const useProfileForm = () => {
 		reset,
 		setError,
 		formState: { isDirty, errors },
-	} = useForm<UserSchema>({
-		resolver: zodResolver(userSchema),
-		mode: "onTouched",
-	});
+	} = useAppForm<UserSchema>(userSchema);
 	useInitialData(reset);
 	useWarnUnsavedChanges(isDirty);
 

@@ -6,6 +6,7 @@ import { financeQueryKeys } from "@/constants/query-keys.constants";
 import incomeService from "@/services/income.service";
 import { toast } from "sonner";
 import useWarnUnsavedChanges from "@/hooks/useWarnUnsavedChanges";
+import useAppForm from "@/hooks/useAppForm";
 
 const useCreateIncome = (closeCallback: () => void) => {
 	const queryClient = useQueryClient();
@@ -23,9 +24,7 @@ const useCreateIncome = (closeCallback: () => void) => {
 		register,
 		handleSubmit,
 		formState: { errors, isDirty },
-	} = useForm<IncomeSchema>({
-		resolver: zodResolver(incomeSchema),
-		mode: "onTouched",
+	} = useAppForm<IncomeSchema>(incomeSchema, {
 		defaultValues: { amount: 1000, title: "" },
 	});
 

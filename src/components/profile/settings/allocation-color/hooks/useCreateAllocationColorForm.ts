@@ -1,9 +1,7 @@
-import { useForm } from "react-hook-form";
 import {
 	allocationColorSchema,
 	AllocationColorSchema,
 } from "../models/allocation-color.schema";
-import { zodResolver } from "@hookform/resolvers/zod";
 import useWarnUnsavedChanges from "@/hooks/useWarnUnsavedChanges";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import allocationColorService from "@/services/allocation-color.service";
@@ -13,6 +11,7 @@ import {
 	profileQueryKey,
 } from "@/constants/query-keys.constants";
 import { useEffect, useState } from "react";
+import useAppForm from "@/hooks/useAppForm";
 
 const useCreateAllocationColorForm = (closeCallback: () => void) => {
 	const queryClient = useQueryClient();
@@ -33,10 +32,7 @@ const useCreateAllocationColorForm = (closeCallback: () => void) => {
 		handleSubmit,
 		setValue,
 		formState: { isDirty, errors },
-	} = useForm<AllocationColorSchema>({
-		resolver: zodResolver(allocationColorSchema),
-		mode: "onTouched",
-	});
+	} = useAppForm<AllocationColorSchema>(allocationColorSchema);
 
 	useWarnUnsavedChanges(isDirty);
 

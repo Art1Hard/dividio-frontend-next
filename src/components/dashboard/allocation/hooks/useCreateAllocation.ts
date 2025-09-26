@@ -1,15 +1,14 @@
 import { financeQueryKeys } from "@/constants/query-keys.constants";
 import useWarnUnsavedChanges from "@/hooks/useWarnUnsavedChanges";
 import allocationService from "@/services/allocation.service";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import {
 	allocationSchema,
 	AllocationSchema,
 } from "../models/allocation.schema";
 import { isServerError } from "@/utils/server-error.utils";
+import useAppForm from "@/hooks/useAppForm";
 
 const useCreateAllocation = (closeCallback: () => void) => {
 	const {
@@ -18,11 +17,10 @@ const useCreateAllocation = (closeCallback: () => void) => {
 		watch,
 		setError,
 		formState: { errors, isDirty },
-	} = useForm<AllocationSchema>({
-		resolver: zodResolver(allocationSchema),
-		mode: "onTouched",
+	} = useAppForm<AllocationSchema>(allocationSchema, {
 		defaultValues: { percentage: 5, title: "", colorId: "" },
 	});
+
 	const selectedColor = watch("colorId");
 	useWarnUnsavedChanges(isDirty);
 

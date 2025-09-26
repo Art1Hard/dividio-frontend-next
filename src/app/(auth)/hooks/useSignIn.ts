@@ -1,9 +1,8 @@
-import { useForm } from "react-hook-form";
 import { SignInSchema, signInSchema } from "../models/sign-in.schema";
 import useAuth from "./useAuth";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { isServerError } from "@/utils/server-error.utils";
 import { toast } from "sonner";
+import useAppForm from "@/hooks/useAppForm";
 
 const useSignIn = () => {
 	const {
@@ -14,13 +13,9 @@ const useSignIn = () => {
 	const {
 		register,
 		handleSubmit,
-		reset,
 		setError,
 		formState: { errors, isDirty },
-	} = useForm<SignInSchema>({
-		resolver: zodResolver(signInSchema),
-		mode: "onTouched",
-	});
+	} = useAppForm<SignInSchema>(signInSchema);
 
 	const submit = handleSubmit(async (data) => {
 		try {

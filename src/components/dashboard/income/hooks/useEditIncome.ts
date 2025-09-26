@@ -3,10 +3,9 @@ import { incomeSchema, IncomeSchema } from "../models/income.schema";
 import incomeService from "@/services/income.service";
 import { toast } from "sonner";
 import { financeQueryKeys } from "@/constants/query-keys.constants";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { IIncome } from "@/types/income.types";
 import useWarnUnsavedChanges from "@/hooks/useWarnUnsavedChanges";
+import useAppForm from "@/hooks/useAppForm";
 
 const useEditIncome = (income: IIncome, closeCallback: () => void) => {
 	const queryClient = useQueryClient();
@@ -25,9 +24,7 @@ const useEditIncome = (income: IIncome, closeCallback: () => void) => {
 		register,
 		handleSubmit,
 		formState: { errors, isDirty },
-	} = useForm<IncomeSchema>({
-		resolver: zodResolver(incomeSchema),
-		mode: "onTouched",
+	} = useAppForm<IncomeSchema>(incomeSchema, {
 		defaultValues: income,
 	});
 
