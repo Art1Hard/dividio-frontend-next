@@ -37,11 +37,13 @@ const BaseModal = ({
 				onMouseDown={overlayMouseDown}
 				onMouseUp={overlayMouseUp}>
 				<div className="bg-primary-200 p-4 pt-16 h-fit my-auto rounded-xl w-full max-w-md relative cursor-auto">
-					<div className="absolute top-3 right-4 left-4 flex items-center justify-between gap-x-3">
+					<div className="absolute top-3 right-4 left-4 flex items-center justify-between gap-x-4">
 						<h2 className="text-nowrap overflow-hidden overflow-ellipsis font-medium text-lg">
 							{title}
 						</h2>
-						<button onClick={onClose} className="cursor-pointer p-2">
+						<button
+							onClick={onClose}
+							className="cursor-pointer p-2 mr-[-0.5rem]">
 							<BiX size={24} />
 						</button>
 					</div>
