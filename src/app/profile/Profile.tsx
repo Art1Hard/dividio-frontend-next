@@ -1,18 +1,15 @@
 "use client";
 
-import BaseButton from "@/components/ui/buttons/BaseButton";
-import useLogout from "./hooks/useLogout";
 import { LuCornerDownLeft, LuSettings2 } from "react-icons/lu";
 import ProfileForm from "@/components/profile/ProfileForm";
 import Settings from "@/components/profile/settings/Settings";
 import { useRouter, useSearchParams } from "next/navigation";
+import Logout from "./Logout";
 
 const Profile = () => {
 	const router = useRouter();
 	const searchParams = useSearchParams();
 	const isSettings = searchParams.get("tab") === "settings";
-
-	const { logout, isPending: isLogoutPending } = useLogout();
 
 	const toggleTab = () => {
 		router.push(`/profile${!isSettings ? "?tab=settings" : ""}`);
@@ -43,13 +40,7 @@ const Profile = () => {
 
 				<hr className="border-secondary-500 my-4" />
 
-				<BaseButton
-					disabled={isLogoutPending}
-					color="danger"
-					className="w-full font-semibold"
-					onClick={() => logout()}>
-					{isLogoutPending ? "Выходим..." : "Выйти"}
-				</BaseButton>
+				<Logout />
 			</div>
 		</div>
 	);
