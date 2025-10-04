@@ -38,13 +38,19 @@ const useCreateAllocation = (closeCallback: () => void) => {
 		},
 		onError: (e) => {
 			if (isServerError(e)) {
-				if (e.response!.data.code === ERROR_CODE.ALLOCATION_LIMIT_EXCEEDED)
-					setError("percentage", {
-						type: "server",
-						message: `Вы не можете ввести более ${
-							e.response!.data!.details?.available
-						}%`,
-					});
+				switch (e.response!.data.code) {
+					case ERROR_CODE.ALLOCATION_LIMIT_EXCEEDED:
+						setError("percentage", {
+							type: "server",
+							message: `Вы не можете ввести более ${
+								e.response!.data!.details?.available
+							}%`,
+						});
+						break;
+
+					default:
+						toast.error(e.response!.data.message);
+				}
 			}
 		},
 	});
