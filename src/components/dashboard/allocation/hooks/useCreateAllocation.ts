@@ -10,8 +10,11 @@ import {
 import { isServerError } from "@/utils/server-error.utils";
 import useAppForm from "@/hooks/useAppForm";
 import { ERROR_CODE } from "@/constants/error-code.constants";
+import useProfile from "@/hooks/useProfile";
 
 const useCreateAllocation = (closeCallback: () => void) => {
+	const { profile } = useProfile();
+
 	const {
 		register,
 		handleSubmit,
@@ -19,7 +22,7 @@ const useCreateAllocation = (closeCallback: () => void) => {
 		setError,
 		formState: { errors, isDirty },
 	} = useAppForm<AllocationSchema>(allocationSchema, {
-		defaultValues: { percentage: 5, title: "", colorId: "" },
+		defaultValues: { percentage: 5, title: "", colorId: profile?.colors[0].id },
 	});
 
 	const selectedColor = watch("colorId");
