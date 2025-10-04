@@ -9,6 +9,7 @@ import {
 } from "../models/allocation.schema";
 import { isServerError } from "@/utils/server-error.utils";
 import useAppForm from "@/hooks/useAppForm";
+import { ERROR_CODE } from "@/constants/error-code.constants";
 
 const useCreateAllocation = (closeCallback: () => void) => {
 	const {
@@ -34,7 +35,7 @@ const useCreateAllocation = (closeCallback: () => void) => {
 		},
 		onError: (e) => {
 			if (isServerError(e)) {
-				if (e.response!.data.code === "ALLOCATION_LIMIT_EXCEEDED")
+				if (e.response!.data.code === ERROR_CODE.ALLOCATION_LIMIT_EXCEEDED)
 					setError("percentage", {
 						type: "server",
 						message: `Вы не можете ввести более ${

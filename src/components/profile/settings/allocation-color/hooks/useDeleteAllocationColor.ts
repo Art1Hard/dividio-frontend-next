@@ -1,3 +1,4 @@
+import { ERROR_CODE } from "@/constants/error-code.constants";
 import {
 	financeQueryKeys,
 	profileQueryKey,
@@ -20,11 +21,16 @@ const useDeleteAllocationColor = () => {
 		onError: (e) => {
 			if (isServerError(e)) {
 				switch (e.response!.data.code) {
-					case "COLOR_USED":
+					case ERROR_CODE.COLOR_USED:
 						toast.error(
 							"Вы не можете удалить этот цвет, так как он используется в распределении"
 						);
 						break;
+
+					case ERROR_CODE.COLOR_MIN_COUNT:
+						toast.error("Необходимо оставить хотя бы 3 цвета");
+						break;
+
 					default:
 						toast.error("Произошла ошибка при удалении цвета");
 				}

@@ -1,3 +1,4 @@
+import { ERROR_CODE } from "@/constants/error-code.constants";
 import { financeQueryKeys } from "@/constants/query-keys.constants";
 import incomeService from "@/services/income.service";
 import { isServerError } from "@/utils/server-error.utils";
@@ -15,7 +16,7 @@ const useDeleteIncome = () => {
 		},
 		onError: (e) => {
 			if (isServerError(e)) {
-				if (e.response!.data.code === "LAST_INCOME_VALIDATION_ERROR")
+				if (e.response!.data.code === ERROR_CODE.LAST_INCOME_VALIDATION_ERROR)
 					toast.error(
 						"Вы не можете удалить последний доход пока есть распределения!"
 					);

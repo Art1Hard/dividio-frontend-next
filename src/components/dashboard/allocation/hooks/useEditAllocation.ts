@@ -12,6 +12,7 @@ import allocationService, {
 import useWarnUnsavedChanges from "@/hooks/useWarnUnsavedChanges";
 import { IAllocation } from "@/types/allocation.types";
 import useAppForm from "@/hooks/useAppForm";
+import { ERROR_CODE } from "@/constants/error-code.constants";
 
 const useEditAllocation = (
 	allocation: IAllocation,
@@ -40,7 +41,7 @@ const useEditAllocation = (
 		},
 		onError: (e) => {
 			if (isServerError(e)) {
-				if (e.response!.data.code === "ALLOCATION_LIMIT_EXCEEDED")
+				if (e.response!.data.code === ERROR_CODE.ALLOCATION_LIMIT_EXCEEDED)
 					setError("percentage", {
 						type: "server",
 						message: `Вы не можете ввести более ${

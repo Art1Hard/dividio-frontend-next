@@ -11,6 +11,8 @@ import {
 	profileQueryKey,
 } from "@/constants/query-keys.constants";
 import useAppForm from "@/hooks/useAppForm";
+import { isServerError } from "@/utils/server-error.utils";
+import { ERROR_CODE } from "@/constants/error-code.constants";
 
 const useCreateAllocationColorForm = (closeCallback: () => void) => {
 	const queryClient = useQueryClient();
@@ -23,6 +25,12 @@ const useCreateAllocationColorForm = (closeCallback: () => void) => {
 			queryClient.invalidateQueries({ queryKey: [financeQueryKeys.all] });
 			queryClient.invalidateQueries({ queryKey: [profileQueryKey] });
 			closeCallback();
+		},
+		onError: (e) => {
+			if (isServerError(e)) {
+				if (e.response!.data.code === ERROR_CODE.COLOR_MAX_COUNT)
+					toast.error("Вы не можете добавить более 10 цветов");
+			}
 		},
 	});
 
