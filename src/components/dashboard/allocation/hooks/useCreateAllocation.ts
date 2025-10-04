@@ -49,10 +49,7 @@ const useCreateAllocation = (closeCallback: () => void) => {
 		},
 	});
 
-	const submit = handleSubmit((data) => {
-		console.log(data);
-		createAllocation(data);
-	});
+	const submit = handleSubmit((data) => createAllocation(data));
 
 	return {
 		register,
