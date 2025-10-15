@@ -10,6 +10,7 @@ const AllocationList = () => {
 		<AsyncList
 			query={allocationQuery}
 			loader={<DashboardWidgetItemSkeleton count={3} />}
+			emptyText="Нет назначенных распределений"
 			renderItem={(allocation) => (
 				<AllocationItem key={allocation.id} item={allocation} />
 			)}

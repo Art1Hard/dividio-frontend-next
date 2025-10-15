@@ -2,11 +2,13 @@ import { dashboardWidgetItemAnimation } from "@/constants/animation.constants";
 import { IAsyncQuery } from "@/types/async-query.types";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { JSX } from "react";
+import EmptyData from "./ui/EmptyData";
 
 interface ListProps<T extends Record<string, any>> {
 	query: IAsyncQuery<T>;
 	loader?: JSX.Element;
 	errorElement?: JSX.Element;
+	emptyText?: string;
 	renderItem: (item: T, index: number) => JSX.Element;
 }
 
@@ -14,13 +16,15 @@ export const AsyncList = <T extends Record<string, any>>({
 	query,
 	loader,
 	errorElement,
+	emptyText,
 	renderItem,
 }: ListProps<T>) => {
 	const shouldReduceMotion = useReducedMotion();
 
 	if (query.isLoading) return loader;
 	if (query.isError) return errorElement;
-	if (!query.data) return null;
+	if (!query.data || query.data.length <= 0)
+		return emptyText && <EmptyData>{emptyText}</EmptyData>;
 
 	return (
 		<AnimatePresence>

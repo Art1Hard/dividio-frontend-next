@@ -12,6 +12,7 @@ const IncomeList = () => {
 		<AsyncList
 			query={incomeQuery}
 			loader={<DashboardWidgetItemSkeleton count={2} />}
+			emptyText="Нет ни одного источника дохода"
 			renderItem={(income) => <IncomeItem key={income.id} income={income} />}
 		/>
 	);

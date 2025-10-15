@@ -6,6 +6,7 @@ import Header from "@/components/header";
 import clsx from "clsx";
 import Providers from "./providers";
 import { Toaster } from "sonner";
+import Footer from "@/components/Footer";
 
 const inter = Inter({
 	subsets: ["latin", "cyrillic"],
@@ -42,6 +43,7 @@ export default function RootLayout({
 						position="bottom-right"
 						theme="system"
 					/>
+					<Footer />
 				</Providers>
 			</body>
 		</html>
