@@ -12,7 +12,7 @@ const inter = Inter({
 	subsets: ["latin", "cyrillic"],
 	variable: "--font-inter",
 	display: "swap",
-	weight: ["400", "500", "600", "700"], // можно выбрать нужные веса
+	weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -20,7 +20,6 @@ export const metadata: Metadata = {
 		default: SITE_NAME,
 		template: `%s | ${SITE_NAME}`,
 	},
-	description: "Save your money and earn with it",
 };
 
 export default function RootLayout({
@@ -29,7 +28,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en">
+		<html lang="ru">
 			<body
 				className={clsx(
 					inter.variable,

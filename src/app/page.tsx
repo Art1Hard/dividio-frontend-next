@@ -1,6 +1,16 @@
 import ActionSection from "@/components/home/ActionSection";
 import FeaturesSection from "@/components/home/FeaturesSection";
 import IntroSection from "@/components/home/IntroSection";
+import { SITE_NAME } from "@/constants/seo.constants";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: `Главная | ${SITE_NAME}`,
+	description:
+		"Контролируйте доходы, распределяйте их по категориям и следите за статистикой. Всё для финансового порядка — в одном месте.",
+	keywords:
+		"Dividio, доходы, расходы, категории, статистика, финансы, управление финансами",
+};
 
 export default function HomePage() {
 	return (
