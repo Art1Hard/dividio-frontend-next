@@ -12,8 +12,8 @@ export const getAccessToken = () => {
 
 export const saveTokenStorage = (accessToken: string) => {
 	Cookies.set(EnumTokens.ACCESS_TOKEN, accessToken, {
-		domain: "dividio-backend.onrender.com",
-		sameSite: "lax",
+		sameSite: "None",
+		secure: true,
 		expires: new Date(Date.now() + 60 * 60 * 1000),
 	});
 };
