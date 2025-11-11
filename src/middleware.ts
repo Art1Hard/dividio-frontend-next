@@ -14,28 +14,21 @@ const isPublicRoute = (pathname: string) => {
 };
 
 export async function middleware(request: NextRequest, response: NextResponse) {
-	const { url, cookies } = request;
-	const { pathname } = request.nextUrl;
-
-	if (isPublicRoute(pathname)) {
-		return NextResponse.next();
-	}
-
-	const refreshToken = cookies.get(EnumTokens.REFRESH_TOKEN)?.value;
-
-	const isAuthPage =
-		url.includes(ROUTES.SIGN_IN) || url.includes(ROUTES.SIGN_UP);
-
-	if (isAuthPage && refreshToken)
-		return NextResponse.redirect(new URL(ROUTES.DASHBOARD, url));
-
-	if (isAuthPage) return NextResponse.next();
-
-	if (!refreshToken) return NextResponse.redirect(new URL(ROUTES.SIGN_IN, url));
-
-	return NextResponse.next();
+	// const { url, cookies } = request;
+	// const { pathname } = request.nextUrl;
+	// if (isPublicRoute(pathname)) {
+	// 	return NextResponse.next();
+	// }
+	// const refreshToken = cookies.get(EnumTokens.REFRESH_TOKEN)?.value;
+	// const isAuthPage =
+	// 	url.includes(ROUTES.SIGN_IN) || url.includes(ROUTES.SIGN_UP);
+	// if (isAuthPage && refreshToken)
+	// 	return NextResponse.redirect(new URL(ROUTES.DASHBOARD, url));
+	// if (isAuthPage) return NextResponse.next();
+	// if (!refreshToken) return NextResponse.redirect(new URL(ROUTES.SIGN_IN, url));
+	// return NextResponse.next();
 }
 
-export const config = {
-	matcher: ["/dashboard/:path*", "/profile/:path*", "/sign-in", "/sign-up"],
-};
+// export const config = {
+// 	matcher: ["/dashboard/:path*", "/profile/:path*", "/sign-in", "/sign-up"],
+// };
