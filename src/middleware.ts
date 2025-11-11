@@ -2,13 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { EnumTokens } from "./services/auth-token.services";
 import { ROUTES } from "./config/routes.config";
 
-const routesWithWildcard = [
-	ROUTES.DASHBOARD,
-	ROUTES.PROFILE,
-	ROUTES.SIGN_IN,
-	ROUTES.SIGN_UP,
-];
-
 const isPublicRoute = (pathname: string) => {
 	const publicRoutes = [ROUTES.HOME];
 
@@ -44,9 +37,5 @@ export async function middleware(request: NextRequest, response: NextResponse) {
 }
 
 export const config = {
-	matcher: routesWithWildcard.map((route) =>
-		route === ROUTES.DASHBOARD || route === ROUTES.PROFILE
-			? `${route}/:path*`
-			: route
-	),
+	matcher: ["/dashboard/:path*", "/profile/:path*", "/sign-in", "/sign-up"],
 };
